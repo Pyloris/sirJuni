@@ -1,5 +1,5 @@
 <?php
-namespace sirJuni\Components\Request;
+namespace sirJuni\Framework\Components\Request;
 
 class Request {
     private $name;

@@ -6,7 +6,7 @@
     "version": "0.0.1",
     "autoload": {
         "psr-4": {
-            "sirJuni\\": "src/"
+            "sirJuni\\Framework\\": "src/"
         },
         "files": []
     },
