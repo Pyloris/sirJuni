@@ -1,0 +1,17 @@
+{
+    "name": "shoaib/sir-juni",
+    "description": "A simple mini-php framework to build backends.",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Shoaib\\SirJuni\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "pyloris",
+            "email": "wanishoaib@protonmail.com"
+        }
+    ],
+    "require": {}
+}
