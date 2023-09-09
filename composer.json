@@ -2,10 +2,13 @@
     "name": "shoaib/sir-juni",
     "description": "A simple mini-php framework to build backends.",
     "type": "project",
+    "license": "MIT",
+
     "autoload": {
         "psr-4": {
             "Shoaib\\SirJuni\\": "src/"
-        }
+        },
+        "files": []
     },
     "authors": [
         {
@@ -13,5 +16,10 @@
             "email": "wanishoaib@protonmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "php": ">=8.2"
+    },
+
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }
