@@ -12,8 +12,8 @@ class Router {
 
         $default_method = 'GET';
         if (array_key_exists($this->routes, $route)) {
-            $controller = $routes[$route][$default_method][0];
-            $handler = $routes[$route][$default_method][1];
+            $controller = $this->routes[$route][$default_method][0];
+            $handler = $this->routes[$route][$default_method][1];
 
             $contr = new $controller();
             $contr->{$handler}();
@@ -29,8 +29,8 @@ class Router {
 
         $default_method = 'POST';
         if (array_key_exists($this->routes, $route)) {
-            $controller = $routes[$route][$default_method][0];
-            $handler = $routes[$route][$default_method][1];
+            $controller = $this->routes[$route][$default_method][0];
+            $handler = $this->routes[$route][$default_method][1];
 
             $contr = new $controller();
             $contr->{$handler}();
