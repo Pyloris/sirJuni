@@ -33,7 +33,7 @@ abstract class Application {
         $url = explode("?", $url);
 
         // split the path
-        $path = explode('/', trim($url[0]));
+        $path = explode('/', HelperFuncs::trim_slash($url[0]));
 
         // store the corresponding parts
         $this->controller = isset($path[0]) ? HelperFuncs::trim_slash(trim($path[0])) : NULL;
