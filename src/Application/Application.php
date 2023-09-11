@@ -54,7 +54,7 @@ class Application {
 
 
         // if count($url) is > 1, then there are query params given
-        if (count(url) > 1)
+        if (count($url) > 1)
             parse_str(trim($url[1]), $this->query_str);             // parse string into associative array
     }
 }
