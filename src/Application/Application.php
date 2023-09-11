@@ -8,16 +8,16 @@ use sirJuni\Framework\Handler\Router;
 abstract class Application {
 
     // hold the first part of url [it corresponds to controller to be used]
-    private $controller = NULL;
+    public $controller = NULL;
     
     // hold the second url part [which corresponds to controller method to be called]
-    private $handler = NULL;
+    public $handler = NULL;
 
     // store route parameters
-    private $route_param = NULL;
+    public $route_param = NULL;
 
     // to hold the query string parsed into assoc array
-    private $query_str = NULL;
+    public $query_str = NULL;
 
     public function __construct() {
 
