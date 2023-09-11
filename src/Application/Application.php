@@ -2,6 +2,7 @@
 namespace sirJuni\Framework\Application;
 
 use sirJuni\Framework\Helper\HelperFuncs;
+use sirJuni\Framework\Handler\Router;
 
 // APPLICATION MATCHES MATCHES ROUTES TO PROPER HANDLERS
 class Application {
@@ -25,15 +26,15 @@ class Application {
 
         // there should be a CONTROLLER CONSTANT
         // that points to controllers.php directory
-        require_once CONTROLLERS . '\\controllers.php';
+        Router::get("/$controller");
 
         // create an instance of corresponding controller
         // there should be a path->controller mapping in controllers.php
         // by the name of controllerMap
-        $controller = new controllerMap[$this->controller]();
+        // $controller = new controllerMap[$this->controller]();
 
         // there should be a path to handler
-        $controller->{$this->handler}($route_param);
+        // $controller->{$this->handler}($route_param);
     }
 
     // to split the url into parts
