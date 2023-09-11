@@ -11,7 +11,7 @@ class Router {
         // in handler file
 
         $default_method = 'GET';
-        if (array_key_exists(self::$routes, $route)) {
+        if (array_key_exists($route, self::$routes)) {
             $controller = self::$routes[$route][$default_method][0];
             $handler = self::$routes[$route][$default_method][1];
 
@@ -28,7 +28,7 @@ class Router {
         // include_every(CONTROLLER);
 
         $default_method = 'POST';
-        if (array_key_exists(self::$routes, $route)) {
+        if (array_key_exists($route, self::$routes)) {
             $controller = self::$routes[$route][$default_method][0];
             $handler = self::$routes[$route][$default_method][1];
 
