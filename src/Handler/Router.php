@@ -1,5 +1,5 @@
 <?php
-namespace sirJuni\Framework\Handler\HandlerFuncs;
+namespace sirJuni\Framework\Handler;
 
 
 class Router {
