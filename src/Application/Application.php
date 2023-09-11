@@ -5,7 +5,7 @@ use sirJuni\Framework\Helper\HelperFuncs;
 use sirJuni\Framework\Handler\Router;
 
 // APPLICATION MATCHES MATCHES ROUTES TO PROPER HANDLERS
-class Application {
+abstract class Application {
 
     // hold the first part of url [it corresponds to controller to be used]
     private $controller = NULL;
