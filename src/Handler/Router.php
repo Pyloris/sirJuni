@@ -3,7 +3,7 @@ namespace sirJuni\Framework\Handler;
 
 
 class Router {
-    private readonly static $routes;
+    private readonly static Array $routes;
 
     static public function get($route) {
         
