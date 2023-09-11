@@ -1,7 +1,7 @@
 <?php
 namespace sirJuni\Framework\Application;
 
-use sirJuni\Framework\Helper\HelperFuncs;
+use function sirJuni\Framework\Helper\HelperFuncs\trim_slash;
 use sirJuni\Framework\Handler\Router;
 
 // APPLICATION MATCHES MATCHES ROUTES TO PROPER HANDLERS
