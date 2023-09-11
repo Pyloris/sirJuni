@@ -1,5 +1,5 @@
 <?php
-namespace sirJuni\Framework\Handler;
+namespace sirJuni\Framework\Handler\HandlerFuncs;
 
 
 class Router {
@@ -9,7 +9,6 @@ class Router {
         
         // include controllers
         // in handler file
-        // include_every(CONTROLLER);
 
         $default_method = 'GET';
         if (array_key_exists($routes, $route)) {
