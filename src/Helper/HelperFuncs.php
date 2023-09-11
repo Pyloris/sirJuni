@@ -4,7 +4,7 @@ namespace sirJuni\Framework\Helper;
 class HelperFuncs {
 
     public static function trim_slash($path) {
-        return preg_replace('/\//', '', $path);
+        return preg_replace('/^\/||\/$/', '', $path);
     }
 
     public static function report($e) {

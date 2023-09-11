@@ -17,7 +17,6 @@ class Router {
 
             $contr = new $controller();
             $contr->{$handler}();
-            echo("HELLO");
         }
         else {
             echo("WRONG BUDDY");
