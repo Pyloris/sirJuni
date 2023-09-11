@@ -1,7 +1,7 @@
 <?php
 namespace sirJuni\Framework\Application;
 
-use function sirJuni\Framework\Helper\HelperFuncs;
+use sirJuni\Framework\Helper;
 use sirJuni\Framework\Handler\Router;
 
 // APPLICATION MATCHES MATCHES ROUTES TO PROPER HANDLERS
@@ -48,9 +48,9 @@ class Application {
         $path = explode('/', trim($url[0]));
 
         // store the corresponding parts
-        $this->controller = isset($path[0]) ? HelperFuncs\trim_slash(trim($path[0])) : NULL;
-        $this->handler = isset($path[1]) ? HelperFuncs\trim_slash(trim($path[1])) : NULL;
-        $this->route_param = isset($path[2]) ? HelperFuncs\trim_slash(trim($path[2])) : NULL;
+        $this->controller = isset($path[0]) ? Helper\trim_slash(trim($path[0])) : NULL;
+        $this->handler = isset($path[1]) ? Helper\trim_slash(trim($path[1])) : NULL;
+        $this->route_param = isset($path[2]) ? Helper\trim_slash(trim($path[2])) : NULL;
 
 
         // if count($url) is > 1, then there are query params given
