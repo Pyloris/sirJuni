@@ -26,7 +26,7 @@ class Application {
 
         // there should be a CONTROLLER CONSTANT
         // that points to controllers.php directory
-        Router::get("/$controller/$handler");
+        Router::get("/$this->controller/$this->handler");
 
         // create an instance of corresponding controller
         // there should be a path->controller mapping in controllers.php
