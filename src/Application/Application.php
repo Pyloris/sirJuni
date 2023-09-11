@@ -23,18 +23,6 @@ class Application {
 
         // split the url
         $this->splitURL();
-
-        // there should be a CONTROLLER CONSTANT
-        // that points to controllers.php directory
-        Router::get("/$this->controller/$this->handler");
-
-        // create an instance of corresponding controller
-        // there should be a path->controller mapping in controllers.php
-        // by the name of controllerMap
-        // $controller = new controllerMap[$this->controller]();
-
-        // there should be a path to handler
-        // $controller->{$this->handler}($route_param);
     }
 
     // to split the url into parts
@@ -57,6 +45,9 @@ class Application {
         if (count($url) > 1)
             parse_str(trim($url[1]), $this->query_str);             // parse string into associative array
     }
+
+
+    abstract private function handler();
 }
 
 ?>
