@@ -47,7 +47,7 @@ class Application {
     }
 
 
-    private abstract function handler();
+    abstract public function handler();
 }
 
 ?>
