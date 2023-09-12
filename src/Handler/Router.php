@@ -11,6 +11,8 @@ class Router {
         $default_method = $_SERVER['REQUEST_METHOD'];
 
         foreach (self::$routes as $pattern=>$handler) {
+            echo($pattern);
+            echo("<br/>");
             if (preg_match_all($pattern, HelperFuncs::trim_slash($route, 'end'), $matches)) {
                 $controller = $handler[$default_method][0];
                 $func = $handler[$default_method][1];
