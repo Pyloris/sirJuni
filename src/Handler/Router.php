@@ -10,13 +10,13 @@ class Router {
 
         $default_method = $_SERVER['REQUEST_METHOD'];
 
-        foreach (self::$routes as $pattern) {
-            if (preg_match_all($pattern, HelperFuncs::trim_slash($route, 'end'))) {
-                $controller = self::$routes[$pattern][$default_method][0];
-                $handler = self::$routes[$pattern][$default_method][1];
+        foreach (self::$routes as $pattern=>$handler) {
+            if (preg_match_all($pattern, HelperFuncs::trim_slash($route, 'end'), $matches)) {
+                $controller = $handler[$default_method][0];
+                $func = $handler[$default_method][1];
 
                 $contr = new $controller();
-                $contr->{$handler}();
+                $contr->{$func}();
                 exit(0);
             }
         }
