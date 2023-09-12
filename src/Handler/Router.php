@@ -18,7 +18,7 @@ class Router {
                 $func = $handler[$default_method][1];
 
                 $contr = new $controller();
-                $contr->{$func}();
+                $contr->{$func}(isset($matches[1]) ? $matches[1] : NULL);
                 exit(0);
             }
         }
@@ -33,7 +33,7 @@ class Router {
         // if placeholder is used
         // replace it with any regex (.*)$
 
-        $route = preg_replace('/\{[a-zA-Z0-9]*\}(\/*||)$/', '[a-zA-Z0-9]*', $route);
+        $route = preg_replace('/\{[a-zA-Z0-9]*\}(\/*||)$/', '([a-zA-Z0-9]*)', $route);
         $route = '/' . preg_replace('/\//', '\/', $route) . '/';
 
         // add route            // handler = [controller, method]
