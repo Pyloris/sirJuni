@@ -34,7 +34,7 @@ class Router {
         // replace it with any regex (.*)$
 
         $route = preg_replace('/\{[a-zA-Z0-9]*\}(\/*||)$/', '[a-zA-Z0-9]*', $route);
-        $route = '/' . preg_quote($route, '/') . '/';
+        $route = preg_replace('/\//', '\/');
 
         // add route            // handler = [controller, method]
         self::$routes[$route] = [
