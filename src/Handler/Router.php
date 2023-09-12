@@ -4,7 +4,7 @@ namespace sirJuni\Framework\Handler;
 use sirJuni\Framework\Helper\HelperFuncs;
 
 class Router {
-    private static $routes = [];
+    public static $routes = [];
 
     static public function handle($route, $query=NULL) {
 
