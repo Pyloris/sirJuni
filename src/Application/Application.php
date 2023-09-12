@@ -5,16 +5,9 @@ use sirJuni\Framework\Helper\HelperFuncs;
 use sirJuni\Framework\Handler\Router;
 
 // APPLICATION MATCHES MATCHES ROUTES TO PROPER HANDLERS
-abstract class Application {
+class Application {
 
-    // hold the first part of url [it corresponds to controller to be used]
-    public $controller = NULL;
-    
-    // hold the second url part [which corresponds to controller method to be called]
-    public $handler = NULL;
-
-    // store route parameters
-    public $route_param = NULL;
+    public $path = NULL;
 
     // to hold the query string parsed into assoc array
     public $query_str = NULL;
@@ -32,14 +25,7 @@ abstract class Application {
         // split the query string and path
         $url = explode("?", $url);
 
-        // split the path
-        $path = explode('/', HelperFuncs::trim_slash($url[0]));
-
-        // store the corresponding parts
-        $this->controller = isset($path[0]) ? HelperFuncs::trim_slash(trim($path[0])) : NULL;
-        $this->handler = isset($path[1]) ? HelperFuncs::trim_slash(trim($path[1])) : NULL;
-        $this->route_param = isset($path[2]) ? HelperFuncs::trim_slash(trim($path[2])) : NULL;
-
+        $this->path = $url[0];
 
         // if count($url) is > 1, then there are query params given
         if (count($url) > 1)
@@ -47,7 +33,9 @@ abstract class Application {
     }
 
 
-    abstract public function handler();
+    public function submit() {
+        Router::handle($this->path, $this->query_str);
+    }
 }
 
 ?>
