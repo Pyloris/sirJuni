@@ -51,7 +51,7 @@ class Router {
         self::$error_handler.push($callback);
     }
 
-    private public function serve_error() {
+    private static function serve_error() {
         // serve the error page
         $inst = self::$error_handler[0]();
         $inst->{self::$error_handler[1]}();
