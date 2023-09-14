@@ -21,7 +21,7 @@ class Router {
                 $func = $handler[$default_method][1];
 
                 $contr = new $controller();
-                $contr->{$func}(isset($matches[1]) ? $matches[1] : NULL);
+                $contr->{$func}(['name' => isset($matches[1]) ? $matches[1] : NULL]);
             }
         }
         if ($found == 0) {
