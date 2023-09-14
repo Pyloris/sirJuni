@@ -48,13 +48,16 @@ class Router {
 
     static public function set_error_handler($FQCN, $callback) {
         // save the handler
-        array_push(self::$error_handler, $FQCN, $callback);
+        self::$error_handler = [$FQCN, $callback];
     }
 
     private static function serve_error() {
         // serve the error page
-        $inst = self::$error_handler[0]();
-        $inst->{self::$error_handler[1]}();
+        $fqcn = self::$error_handler[0];
+        $cb = self::$error_handler[1];
+
+        $inst = new $fqcn();
+        $inst->$cb();
     }
 }
 
