@@ -23,9 +23,9 @@ class Router {
                 $contr = new $controller();
                 $contr->{$func}(isset($matches[1]) ? $matches[1] : NULL);
             }
-            else if ($found == 0) {
-                self::serve_error();
-            }
+        }
+        if ($found == 0) {
+            self::serve_error();
         }
     }
 
