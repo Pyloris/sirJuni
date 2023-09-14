@@ -36,8 +36,8 @@ class Router {
         // change path to regex
         // if placeholder is used
         // replace it with any regex (.*)$
-
-        $route = preg_replace('/\{([a-zA-Z0-9]*)\}(\/*||)$/', '(? <\1> [a-zA-Z0-9]*)', $route);
+        $name = preg_match('/([a-zA-Z0-9]*)/', $route);         // grab the name in the placeholder
+        $route = preg_replace('/\{([a-zA-Z0-9]*)\}(\/*||)$/', "(?P<$name>[a-zA-Z0-9]*)", $route);
         $route = '/' . preg_replace('/\//', '\/', $route) . '/';
 
         // add route            // handler = [controller, method]
