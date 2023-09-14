@@ -39,6 +39,12 @@ class Router {
             $method => $handler
         ];
     }
+
+
+    static public function set_error_handler($FQCN, $callback) {
+        $inst = $FQCN();
+        $inst->{$callback}();
+    }
 }
 
 ?>
