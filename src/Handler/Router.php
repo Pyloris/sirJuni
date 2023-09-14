@@ -47,8 +47,8 @@ class Router {
 
 
     static public function set_error_handler($FQCN, $callback) {
-        self::$error_handler.push($FQCN);
-        self::$error_handler.push($callback);
+        // save the handler
+        array_push(self::$error_handler, $FQCN, $callback);
     }
 
     private static function serve_error() {
