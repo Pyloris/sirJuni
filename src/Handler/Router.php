@@ -6,22 +6,27 @@ use sirJuni\Framework\Helper\HelperFuncs;
 class Router {
     public static $routes = [];
 
+    private static $error_handler = [];
+
     static public function handle($route, $query=NULL) {
 
         $default_method = $_SERVER['REQUEST_METHOD'];
 
+        $found = 0;
+
         foreach (self::$routes as $pattern=>$handler) {
             if (preg_match_all($pattern, HelperFuncs::trim_slash($route, 'end'), $matches)) {
+                $found = 1;
                 $controller = $handler[$default_method][0];
                 $func = $handler[$default_method][1];
 
                 $contr = new $controller();
                 $contr->{$func}(isset($matches[1]) ? $matches[1] : NULL);
-                exit(0);
+            }
+            else if ($found == 0) {
+                self::serve_error();
             }
         }
-
-        echo("ERROR ");
     }
 
 
@@ -42,8 +47,14 @@ class Router {
 
 
     static public function set_error_handler($FQCN, $callback) {
-        $inst = $FQCN();
-        $inst->{$callback}();
+        self::$error_handler.push($FQCN);
+        self::$error_handler.push($callback);
+    }
+
+    private public function serve_error() {
+        // serve the error page
+        $inst = self::$error_handler[0]();
+        $inst->{self::$error_handler[1]}();
     }
 }
 
