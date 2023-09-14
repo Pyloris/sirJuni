@@ -22,6 +22,7 @@ class Router {
 
                 $contr = new $controller();
                 $contr->{$func}(['name' => isset($matches[1]) ? $matches[1] : NULL]);
+                exit();
             }
         }
         if ($found == 0) {
