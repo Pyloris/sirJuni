@@ -65,7 +65,7 @@ class Router {
     public function middleware($middlewarefqcn) {
 
         // add the middleware to the last added route;
-        self::$routes[self::$last_path_saved[0]][self::$last_path_saved[1]]['middleware'] = $middlewarefqcn;
+        self::$routes[self::$last_path_saved[0][0]][self::$last_path_saved[0][1]]['middleware'] = $middlewarefqcn;
     }
 
 
