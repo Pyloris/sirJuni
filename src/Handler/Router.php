@@ -19,7 +19,7 @@ class Router {
                 $found = 1;
                 $controller = $handler[$default_method][0];
                 $func = $handler[$default_method][1];
-                $middelware = isset($handler[$default_method]['middleware']) ? $handler[$default_method]['middleware'] : NULL;
+                $middleware = isset($handler[$default_method]['middleware']) ? $handler[$default_method]['middleware'] : NULL;
 
                 if ($middleware){
                     if ($middleware::handle()) {
