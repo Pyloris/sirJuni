@@ -6,10 +6,10 @@ use sirJuni\Framework\Helper\HelperFuncs;
 
 class Auth {
 
-    public static $path;
+    public static $url;
 
-    public static function set_auth_page($path) {
-        self::$path = $path;
+    public static function set_auth_url($url) {
+        self::$url = $url;
     }
 
     public static function login($data) {
@@ -33,7 +33,7 @@ class Auth {
 
     public static function handle() {
         if (!self::check()) {
-            HelperFuncs::redirect(self::$path);
+            HelperFuncs::redirect($url);
         }
         // let the router handle the request
         return TRUE;
