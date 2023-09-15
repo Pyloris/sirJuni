@@ -8,6 +8,8 @@ class Router {
 
     private static $error_handler = [];
 
+    private static $last_path_saved = [];
+
     static public function handle($route, $query=NULL) {
 
         $default_method = $_SERVER['REQUEST_METHOD'];
@@ -54,17 +56,16 @@ class Router {
             $method => $handler
         ];
 
+        self::$last_path_saved[0] = [$route, $method];
+
         return new self();
     }
 
 
     public function middleware($middlewarefqcn) {
 
-        $route_handlers = end(self::$routes);
-
-        foreach($route_handlers as $handler) {
-            $handler['middleware'] = $middlewarefqcn;
-        }
+        // add the middleware to the last added route;
+        self::$routes[self::$last_path_saved[0]][self::$last_path_saved[1]]['middleware'] = $middlewarefqcn;
     }
 
 
