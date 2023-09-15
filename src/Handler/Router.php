@@ -19,9 +19,18 @@ class Router {
                 $found = 1;
                 $controller = $handler[$default_method][0];
                 $func = $handler[$default_method][1];
+                $middelware = isset($handler[$default_method]['middleware']) ? $handler[$default_method]['middleware'] : NULL;
 
-                $contr = new $controller();
-                $contr->{$func}(['name' => isset($matches[1]) ? $matches[1] : NULL]);
+                if ($middleware){
+                    if ($middleware::handle()) {
+                        $contr = new $controller();
+                        $contr->{$func}(['name' => isset($matches[1]) ? $matches[1] : NULL]);
+                    }
+                }
+                else {
+                    $contr = new $controller();
+                    $contr->{$func}(['name' => isset($matches[1]) ? $matches[1] : NULL]);
+                }
                 exit();
             }
         }
@@ -44,6 +53,18 @@ class Router {
         self::$routes[$route] = [
             $method => $handler
         ];
+
+        return new self();
+    }
+
+
+    public function middleware($middlewarefqcn) {
+
+        $route_handlers = end(self::$routes);
+
+        foreach($route_handlers as $handler) {
+            $handler['middleware'] = $middlewarefqcn;
+        }
     }
 
 
