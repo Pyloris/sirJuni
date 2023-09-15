@@ -16,8 +16,8 @@ class HelperFuncs {
         echo("File : " . $e->getFile() . "<br\> Line : " . $e->getLine() . "<br\> Message : " . $e->getMessage());
     }
 
-    public static function redirect($url, $query) {
-        header("Location: $url?$query");
+    public static function redirect($url, $query=NULL) {
+        header("Location: $url" . $query ?? '');
     }
 }
 
