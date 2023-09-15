@@ -33,7 +33,7 @@ class Auth {
 
     public static function handle() {
         if (!self::check()) {
-            header("Location: $url");
+            HelperFuncs::redirect(self::$url);
         }
         // let the router handle the request
         return TRUE;
