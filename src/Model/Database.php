@@ -7,7 +7,7 @@ use sirJuni\Framework\Helper\HelperFuncs;
 class Database {
     private $db;
     public function __construct() {
-        dbConnect();
+        $this->dbConnect();
     }
 
     private function dbConnect() {
