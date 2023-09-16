@@ -17,8 +17,9 @@ class Router {
         $found = 0;
 
         foreach (self::$routes as $pattern=>$handler) {
-            if (preg_match_all($pattern, HelperFuncs::trim_slash($route, 'end'), $matches)) {
+            if (preg_match_all($pattern, HelperFuncs::trim_slash($route, 'end'), $matches) and array_key_exists($default_method, $handler)) {
                 $found = 1;
+                
                 $controller = $handler[$default_method][0];
                 $func = $handler[$default_method][1];
                 $middleware = isset($handler[$default_method]['middleware']) ? $handler[$default_method]['middleware'] : NULL;
@@ -49,7 +50,7 @@ class Router {
         // replace it with any regex (.*)$
 
         $route = preg_replace('/\{[a-zA-Z0-9]*\}(\/*||)$/', '([a-zA-Z0-9]*)', $route);
-        $route = '/' . preg_replace('/\//', '\/', $route) . '/';
+        $route = '/' . '^' . preg_replace('/\//', '\/', $route) . '$' . '/';
 
         // add route            // handler = [controller, method]
         self::$routes[$route] = [

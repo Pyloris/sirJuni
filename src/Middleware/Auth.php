@@ -13,21 +13,27 @@ class Auth {
     }
 
     public static function login($data) {
-        session_start();
+        if (session_status() == PHP_SESSION_NONE)
+            session_start();
         $_SESSION['userid'] = $data['id'];
         $_SESSION['username'] = $data['name'];
         $_SESSION['user_email'] = $data['email'];
     }
 
     public static function logout() {
-        session_destroy();
-        unset($_SESSION['userid']);
-        unset($_SESSION['username']);
-        unset($_SESSION['user_email']);
+        if (Auth::check()){
+            if (session_status() == PHP_SESSION_NONE)
+                session_start();
+            session_destroy();
+            unset($_SESSION['userid']);
+            unset($_SESSION['username']);
+            unset($_SESSION['user_email']);
+        }
     }
 
     public static function check() {
-        session_start();
+        if (session_status() == PHP_SESSION_NONE)
+            session_start();
         return isset($_SESSION['userid']) ? TRUE : FALSE;
     }
 

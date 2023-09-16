@@ -1,6 +1,7 @@
 <?php
 namespace sirJuni\Framework\Model;
 
+use PDO;
 use sirJuni\Framework\Helper\HelperFuncs;
 
 class Database {
