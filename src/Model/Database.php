@@ -6,11 +6,8 @@ use sirJuni\Framework\Helper\HelperFuncs;
 
 class Database {
     protected $db;
-    public function __construct() {
-        $this->dbConnect();
-    }
 
-    private function dbConnect() {
+    protected function dbConnect() {
         $dsn = DB_TYPE . ":host=" . DB_HOST . ";dbname=" . DB_NAME . ";";
         $dbUser = DB_USER;
         $dbPass = DB_PASS;
