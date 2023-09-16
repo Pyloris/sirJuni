@@ -5,7 +5,7 @@ use PDO;
 use sirJuni\Framework\Helper\HelperFuncs;
 
 class Database {
-    private $db;
+    protected $db;
     public function __construct() {
         $this->dbConnect();
     }
