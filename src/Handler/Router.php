@@ -1,10 +1,6 @@
 <?php
 namespace sirJuni\Framework\Handler;
 
-use sirJuni\Framework\Helper\HelperFuncs;
-
-use function sirJuni\Framework\Helper\trim_slash;
-
 class Router {
     public static $routes = [];
 
@@ -19,7 +15,7 @@ class Router {
         $found = 0;
 
         foreach (self::$routes as $pattern=>$handler) {
-            if (preg_match_all($pattern, trim_slash($route, 'end'), $matches) and array_key_exists($default_method, $handler)) {
+            if (preg_match_all($pattern, rtrim($route, '/'), $matches) and array_key_exists($default_method, $handler)) {
                 $found = 1;
                 
                 $controller = $handler[$default_method][0];
