@@ -15,11 +15,13 @@ class Router {
         $found = 0;
 
         foreach (self::$routes as $pattern=>$handler) {
-            if (preg_match_all($pattern, rtrim($request->url(), '/'), $matches) and array_key_exists($default_method, $handler)) {
+            if (preg_match($pattern, $request->url(), $matches) and array_key_exists($default_method, $handler)) {
                 $found = 1;
                 // if there is a route match add it to request object
-                if (isset($matches[1]))
-                    $request->addData('route_holder', $matches[1]);
+                foreach($matches as $name=>$value){
+                    if ($name != 0)
+                        $request->addData($name, $value);
+                }
 
                 $controller = $handler[$default_method][0];
                 $func = $handler[$default_method][1];
@@ -46,11 +48,19 @@ class Router {
 
     static public function add_route($method, $route, $handler) {
 
-        // change path to regex
-        // if placeholder is used
-        // replace it with any regex (.*)$
+        $route = rtrim($route, '/');
 
-        $route = preg_replace('/\{[a-zA-Z0-9]*\}(\/*||)$/', '([a-zA-Z0-9]*)', $route);
+        // get all the names of path placeholders
+        preg_match_all('/\{(?<names>[a-zA-Z0-9]+)\}/', $route, $matches);
+        $names = $matches['names'];
+        
+        // for each placeholder, replace it with regex for selection
+        foreach($names as $key=>$value) {
+            // replace the placeholder with alphanumeric regex with name same
+            // as used in the route
+            $route = preg_replace('/\{[a-zA-Z0-9]*\}/', "(?<$value>[a-zA-Z0-9]+)", $route, 1);
+        }
+        // make route into a regex
         $route = '/' . '^' . preg_replace('/\//', '\/', $route) . '$' . '/';
 
         // add route            // handler = [controller, method]
