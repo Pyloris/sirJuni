@@ -8,16 +8,19 @@ class Router {
 
     private static $last_path_saved = [];
 
-    static public function handle($route, $query=NULL) {
+    static public function handle($request) {
 
-        $default_method = $_SERVER['REQUEST_METHOD'];
+        $default_method = $request->method();
 
         $found = 0;
 
         foreach (self::$routes as $pattern=>$handler) {
-            if (preg_match_all($pattern, rtrim($route, '/'), $matches) and array_key_exists($default_method, $handler)) {
+            if (preg_match_all($pattern, rtrim($request->url(), '/'), $matches) and array_key_exists($default_method, $handler)) {
                 $found = 1;
-                
+                // if there is a route match add it to request object
+                if (isset($matches[1]))
+                    $request->addData('route_holder', $matches[1]);
+
                 $controller = $handler[$default_method][0];
                 $func = $handler[$default_method][1];
                 $middleware = isset($handler[$default_method]['middleware']) ? $handler[$default_method]['middleware'] : NULL;
@@ -25,18 +28,18 @@ class Router {
                 if ($middleware){
                     if ($middleware::handle()) {
                         $contr = new $controller();
-                        $contr->{$func}(['name' => isset($matches[1]) ? $matches[1] : NULL]);
+                        $contr->{$func}($request);
                     }
                 }
                 else {
                     $contr = new $controller();
-                    $contr->{$func}(['name' => isset($matches[1]) ? $matches[1] : NULL]);
+                    $contr->{$func}($request);
                 }
                 exit();
             }
         }
         if ($found == 0) {
-            self::serve_error();
+            self::serve_error($request);
         }
     }
 
@@ -73,13 +76,13 @@ class Router {
         self::$error_handler = [$FQCN, $callback];
     }
 
-    private static function serve_error() {
+    private static function serve_error($request) {
         // serve the error page
         $fqcn = self::$error_handler[0];
         $cb = self::$error_handler[1];
 
         $inst = new $fqcn();
-        $inst->$cb();
+        $inst->$cb($request);
     }
 }
 

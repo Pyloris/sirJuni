@@ -3,8 +3,8 @@
 namespace sirJuni\Framework\Controller;
 
 abstract class Controller {
-    abstract public function index();
-    abstract public function update();
+    abstract public function index($request, $data);
+    abstract public function update($request, $data);
 }
 
 ?>
