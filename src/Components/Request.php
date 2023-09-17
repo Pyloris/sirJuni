@@ -13,6 +13,7 @@ interface RequestAPI {
     public function cookieKeys();
     public function addData($key, $value);
     public function getData($key);
+    public function getDataKeys();
 }
 
 
@@ -24,7 +25,7 @@ class Request {
     }
 
     public function url() {
-        return explode('?', $_SERVER['REQUEST_URI'])[0];
+        return rtrim(explode('?', $_SERVER['REQUEST_URI'])[0], '/');
     }
 
     public function addData($key, $value) {
@@ -33,6 +34,10 @@ class Request {
 
     public function getData($key) {
         return isset($this->store[$key]) ? $this->store[$key] : NULL;
+    }
+
+    public function getDataKeys() {
+        return array_keys($this->store);
     }
 
     public function method() {
