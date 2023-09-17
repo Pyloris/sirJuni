@@ -1,5 +1,5 @@
 <?php
-namespace sirJuni\Framework\Handler;
+namespace sirJuni\Framework\Helper;
 
 
 class Storage {
