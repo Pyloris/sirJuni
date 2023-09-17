@@ -1,7 +1,7 @@
 <?php
 namespace sirJuni\Framework\Helper;
 
-class Helper {
+class HelperFuncs {
     function public static report($e) {
         echo("File : " . $e->getFile() . "<br\> Line : " . $e->getLine() . "<br\> Message : " . $e->getMessage());
     }
