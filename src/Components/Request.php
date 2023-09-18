@@ -28,15 +28,15 @@ class Request {
         return rtrim(explode('?', $_SERVER['REQUEST_URI'])[0], '/');
     }
 
-    public function addData($key, $value) {
+    public function addRouteHolder($key, $value) {
         $this->store[$key] = $value; 
     }
 
-    public function getData($key) {
+    public function getRouteValue($key) {
         return isset($this->store[$key]) ? $this->store[$key] : NULL;
     }
 
-    public function getDataKeys() {
+    public function getRouteKeys() {
         return array_keys($this->store);
     }
 
@@ -66,6 +66,14 @@ class Request {
 
     public function cookieKeys() {
         return array_keys($_COOKIE);
+    }
+
+    public function sessionData($key) {
+        return isset($_SESSION[$key]) ? $_SESSION[$key] : NULL;
+    }
+
+    public function sessionKeys() {
+        return array_keys($_SESSION);
     }
 }
 

@@ -20,7 +20,7 @@ class Router {
                 // if there is a route match add it to request object
                 foreach($matches as $name=>$value){
                     if ($name != 0)
-                        $request->addData($name, $value);
+                        $request->addRouteHolder($name, $value);
                 }
 
                 $controller = $handler[$default_method][0];
