@@ -54,6 +54,7 @@ class Storage {
         foreach(self::$keys as $key) {
             unset($_SESSION[$key]);
         }
+        self::keys = [];
         session_write_close();
     }
 }
