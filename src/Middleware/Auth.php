@@ -18,6 +18,7 @@ class Auth {
         $_SESSION['userid'] = $data['id'];
         $_SESSION['username'] = $data['name'];
         $_SESSION['user_email'] = $data['email'];
+        session_write_close();
     }
 
     public static function logout() {
@@ -28,6 +29,7 @@ class Auth {
             unset($_SESSION['userid']);
             unset($_SESSION['username']);
             unset($_SESSION['user_email']);
+            session_write_close();
         }
     }
 
