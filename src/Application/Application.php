@@ -12,7 +12,7 @@ class Application {
         $this->request = new Request();
     }
     
-    public function submit() {
+    public function handle() {
         Router::handle($this->request);
     }
 }
