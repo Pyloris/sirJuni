@@ -4,7 +4,7 @@ namespace sirJuni\Framework\Helper;
 
 class Storage {
 
-    public $keys = [];
+    public static $keys = [];
 
     public static function addData($key, $value) {
         if (session_status() == PHP_SESSION_NONE)
