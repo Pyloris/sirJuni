@@ -88,7 +88,7 @@ class Router {
         // route request through all middlewares as middleware is set
         foreach($middleware as $mdw) {
             // becomes false even if 1 middleware fails
-            $SUCCESS = $mdw::handle();
+            $SUCCESS = $mdw::handle($request);
             
             if (!$SUCCESS)
                 break;

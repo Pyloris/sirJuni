@@ -39,7 +39,7 @@ class Auth {
         return isset($_SESSION['userid']) ? TRUE : FALSE;
     }
 
-    public static function handle() {
+    public static function handle($request) {
         if (!self::check()) {
             HelperFuncs::redirect(self::$url);
         }
