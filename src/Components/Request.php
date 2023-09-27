@@ -1,21 +1,6 @@
 <?php
 namespace sirJuni\Framework\Components;
 
-interface RequestAPI {
-    public function fullUrl();
-    public function url();
-    public function method();
-    public function queryData($key);
-    public function queryKeys();
-    public function formData($key);
-    public function formKeys();
-    public function cookieData($key);
-    public function cookieKeys();
-    public function addData($key, $value);
-    public function getData($key);
-    public function getDataKeys();
-}
-
 
 class Request {
     private $store = [];
