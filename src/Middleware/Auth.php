@@ -8,7 +8,7 @@ class Auth {
 
     public static $url;
 
-    public static function set_auth_url($url) {
+    public static function set_fallback_route($url) {
         self::$url = $url;
     }
 
