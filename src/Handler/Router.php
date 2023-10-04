@@ -32,7 +32,7 @@ class Router {
             // match the current URL against the pattern
             // and check if the Method of request is supported for this URL.
             if (preg_match($pattern, $request->url(), $matches) and array_key_exists($req_method, $handler)) {
-
+                
                 // if the match is found: set flag
                 $found = 1;
 
@@ -108,16 +108,39 @@ class Router {
         // for consistancy remove rightmost / from URL
         $route = rtrim($route, '/');
 
-        // get all the names of path placeholders
-        preg_match_all('/\{(?<names>[a-zA-Z0-9]+)\}/', $route, $matches);
-        $names = $matches['names'];
-        
-        // for each placeholder, replace it with regex for selection
-        foreach($names as $key=>$value) {   
+        // grab the name:type groups using regex
+
+        $name_pattern = '/(?<=\{)(?<names>[a-zA-Z0-9]+)((?=:)|)/';
+        $type_pattern = '/(?<=:)(?<types>[a-zA-Z0-9]+)/';
+
+        preg_match_all($name_pattern, $route, $names_matches);
+        preg_match_all($type_pattern, $route, $types_matches);
+
+        $names = $names_matches['names'];
+        $types = $types_matches['types'] ?? NULL;
+
+        foreach($names as $key=>$value) { 
 
             // replace the placeholder with alphanumeric regex with name same
             // as used in the route
-            $route = preg_replace('/\{[a-zA-Z0-9]*\}/', "(?<$value>[a-zA-Z0-9]+)", $route, 1);
+            if (!$types) {
+                $target = '/\{[a-zA-Z0-9]+\}/';
+                $insert_pattern = "(?<$value>[a-zA-Z0-9]+)";
+            }
+            else if ($types[$key] == 'string'){
+                $target = '/\{[a-zA-Z0-9]+:[a-zA-Z0-9]+\}/';
+                $insert_pattern = "(?<$value>[a-zA-Z0-9]+)";
+            }
+            else if ($types[$key] == 'path') {
+                $target = '/\{[a-zA-Z0-9]+:[a-zA-Z0-9]+\}/';
+                $insert_pattern = "(?<$value>[a-zA-Z0-9/]+)";
+            }
+            else if ($types[$key] == 'int') {
+                $target = '/\{\w+:\w+\}/';
+                $insert_pattern = "(?<$value>\d+)";
+            }
+
+            $route = preg_replace($target, $insert_pattern, $route, 1);
         }
 
         // make route into a regex
