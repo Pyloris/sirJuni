@@ -20,7 +20,7 @@ class Purify  {
         // urlencode any special characters in the link
         // url should be along with scheme
         // replace all unsafe characters with urlencoded versions
-        $unsafe = ['\'', '\s', '<', '>', '\"', '%', '\{', '\}', '\[', '\]', '\|', '\^', '~', '\`'];
+        $unsafe = ['\'', '\s', '<', '>', '\"', '%', '\{', '\}', '\[', '\]', '\|', '\^', '~', '\`', '\*'];
 
         foreach ($unsafe as $target) {
             $data = preg_replace("/$target/", urlencode(ltrim($target, '\\')), $data);
