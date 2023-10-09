@@ -15,17 +15,29 @@ class Router {
     // by accessing the last path added, then adding middleware attribute to it
     private static $last_path_saved = NULL;
 
+    
+    // storing the path to _templates folder
+    // which contains all the necessary html
+    private static $path = __DIR__ . "\\..\\_templates\\";
+
     static public function handle($request) {
 
+        // if no routes have been added
+        // display a default index page
+        if (empty(self::$routes)) {
+            // render default page
+            include(self::$path . "default.html");
+            exit();
+        }
+
+        // grab the method of the request
         $req_method = $request->method();
 
         // flag: set when a match for a route is found.
         $found = 0;
 
-
         // match the current route with every pattern inside of the $route variable
         foreach (self::$routes as $pattern => $handler) {
-
             // pattern : it is the regex of path added when add_route is called
             // handler : it is an array containing the Controller FQCN and method to handle request
 
@@ -57,8 +69,16 @@ class Router {
         // if there is no match for route
         // serve up the error page
         if ($found == 0) {
-            self::serve_error($request);
-            exit();
+            if (!self::$error_handler) {
+                $path = $request->url();
+                // render default error page
+                include(self::$path . "404.html");
+                exit();
+            }
+            else {
+                self::serve_error($request);
+                exit();
+            }
         }
 
 
@@ -163,11 +183,19 @@ class Router {
 
 
     public function middleware($middlewarefqcn) {
-
-        // add the middleware to the last added route;
-        self::$routes[self::$last_path_saved[0]][self::$last_path_saved[1]]['middleware'][] = $middlewarefqcn;
         
-        // return an instance of this class
+        if (self::$last_path_saved){
+            // add the middleware to the last added route;
+            self::$routes[self::$last_path_saved[0]][self::$last_path_saved[1]]['middleware'][] = $middlewarefqcn;
+        }
+        else {
+            // render custom error page
+            $issue = "Wrong middleware() function call";
+            $message = "Expected a route to have been added before a call to Router->middleware() function";
+            include(self::$path . "custom_error.html");
+            exit();
+        }
+        
         return $this;
     }
 
@@ -179,6 +207,7 @@ class Router {
 
     private static function serve_error($request) {
         // serve the error page
+        // check if controller is set
         $fqcn = self::$error_handler[0];
         $cb = self::$error_handler[1];
 

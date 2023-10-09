@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #484041;
+}
+
+h1 {
+    margin-bottom: 5rem;
+}
+
+h3 {
+    color: #f8f4e9;
+    font-size: larger;
+}
+
+p {
+    padding: 1rem;
+
+    font-size: 1.3rem;
+    font-weight: bold; 
+    color: goldenrod;
+}
