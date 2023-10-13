@@ -9,7 +9,7 @@ use sirJuni\Framework\View\VIEW;
 class Application {
     public $request;
 
-    public function __construct($root_dir) {
+    public function __construct() {
         $this->request = new Request();
         VIEW::set_context($this->request);
     }
