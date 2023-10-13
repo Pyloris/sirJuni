@@ -139,7 +139,7 @@ class Router {
         // replace these names with default string types
         preg_match_all($name_only_pattern, $route, $name_only);
         foreach($name_only as $key => $value){
-            preg_replace($name_only_pattern, "{$value:string}", $route, 1)
+            preg_replace($name_only_pattern, "{$value:string}", $route, 1);
         }
 
         preg_match_all($name_pattern, $route, $names_matches);
