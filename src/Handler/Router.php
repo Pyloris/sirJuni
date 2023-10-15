@@ -15,12 +15,18 @@ class Router {
     // by accessing the last path added, then adding middleware attribute to it
     private static $last_path_saved = NULL;
 
+
+    // a static variable to hold the website root.
+    private static $root = NULL;
+
     
     // storing the path to _templates folder
     // which contains all the necessary html
     private static $path = __DIR__ . "\\..\\_templates\\";
 
     static public function handle($request) {
+
+        $root = self::$root;
 
         // if no routes have been added
         // display a default index page
@@ -222,6 +228,10 @@ class Router {
 
         $inst = new $fqcn();
         $inst->$cb($request);
+    }
+
+    public static function set_root($root) {
+        self::$root = $root;
     }
 }
 
