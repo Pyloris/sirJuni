@@ -9,20 +9,15 @@ use sirJuni\Framework\View\VIEW;
 class Application {
     public $request;
 
-    public function __construct($root='/') {
+    public function __construct() {
         // create a new request context
         $this->request = new Request();
 
         // give the request context to the VIEW
         // it unpacks any dynamic url components
         VIEW::set_context($this->request);
-
-        // set the website root, provided from application constructor arg
-        // if root is other than '/', it will be added to router for rendering
-        // templates that come along with framwork.
-        Router::set_root($root);
     }
-    
+
     public function handle() {
         Router::handle($this->request);
     }

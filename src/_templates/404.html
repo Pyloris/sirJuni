@@ -3,12 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href=$root . "vendor/shoaib/sir-juni/src/_templates/css/404.css">
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    }
+
+    body {
+        width: 100%;
+        height: 100vh;
+
+        background-color: #484041;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    img {
+        width: 8rem;
+
+        border-radius: 10%;
+
+        margin-bottom: 2rem;
+    }
+
+    h1 {
+        font-family:Verdana, Geneva, Tahoma, sans-serif;
+
+        margin-bottom: 2rem;
+    }
+
+    span {
+        color: red;
+    }
+
+    h3 {
+        color: #6C9A8B;
+    }
+
+    em {
+        color: yellow;
+    }
+    </style>
     <title>404</title>
 </head>
 <body>
-    <img src=$root . "vendor/shoaib/sir-juni/src/_templates/images/404.jpeg" alt="">
-    <h1><span>404</span> Not Found</h1> 
+    <svg xmlns="http://www.w3.org/2000/svg" width="400" height="200" viewBox="0 0 400 200">
+  <!-- Background Rectangle -->
+  <rect width="100%" height="100%" fill="transparent" />
+
+  <!-- Stylized 404 Text -->
+  <text x="50%" y="50%" text-anchor="middle" alignment-baseline="middle" font-size="80" fill="">
+    404
+  </text>
+</svg>
+
+    <h1>Not Found</h1> 
     <h3>The requested path <em><strong>"<?= $path; ?>"</strong></em> was not found</h3>
 </body>
 </html>

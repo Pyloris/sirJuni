@@ -15,18 +15,11 @@ class Router {
     // by accessing the last path added, then adding middleware attribute to it
     private static $last_path_saved = NULL;
 
-
-    // a static variable to hold the website root.
-    private static $root = NULL;
-
-    
     // storing the path to _templates folder
     // which contains all the necessary html
     private static $path = __DIR__ . "\\..\\_templates\\";
 
     static public function handle($request) {
-
-        $root = self::$root;
 
         // if no routes have been added
         // display a default index page
@@ -133,53 +126,13 @@ class Router {
 
         // for consistancy remove rightmost / from URL
         $route = rtrim($route, '/');
+ 
+        // if there are untyped placeholders
+        // give them string type
+        $route = give_default_types_to_untyped($route);
 
-        // grab the name:type groups using regex
-
-        $name_pattern = '/(?<=\{)(?<names>[a-zA-Z0-9]+)((?=:)|)/';
-        $type_pattern = '/(?<=:)(?<types>[a-zA-Z0-9]+)/';
-
-        // default the missing datatypes to string
-         $name_only_pattern = '/\{(?<name_only>[a-zA-Z0-9]+)\}/';
-
-        // replace these names with default string types
-        preg_match_all($name_only_pattern, $route, $name_only);
-        foreach($name_only['name_only'] as $key => $value){
-            $route = preg_replace($name_only_pattern, "{" . $value . ":string}", $route, 1);
-        }
-
-        preg_match_all($name_pattern, $route, $names_matches);
-        preg_match_all($type_pattern, $route, $types_matches);
-
-        $names = $names_matches['names'];
-        $types = $types_matches['types'] ?? NULL;
-
-        foreach($names as $key=>$value) { 
-
-            // replace the placeholder with alphanumeric regex with name same
-            // as used in the route
-            if (!$types) {
-                $target = '/\{[a-zA-Z0-9]+\}/';
-                $insert_pattern = "(?<$value>[a-zA-Z0-9]+)";
-            }
-            else if ($types[$key] == 'string'){
-                $target = '/\{[a-zA-Z0-9]+:[a-zA-Z0-9]+\}/';
-                $insert_pattern = "(?<$value>[a-zA-Z0-9]+)";
-            }
-            else if ($types[$key] == 'path') {
-                $target = '/\{[a-zA-Z0-9]+:[a-zA-Z0-9]+\}/';
-                $insert_pattern = "(?<$value>[a-zA-Z0-9/]+)";
-            }
-            else if ($types[$key] == 'int') {
-                $target = '/\{\w+:\w+\}/';
-                $insert_pattern = "(?<$value>\d+)";
-            }
-
-            $route = preg_replace($target, $insert_pattern, $route, 1);
-        }
-
-        // make route into a regex
-        $route = '/' . '^' . preg_replace('/\//', '\/', $route) . '$' . '/';
+        // replace the placeholders with regex        
+        $route = replace_placeholders_with_regex($route);
 
         // add route            // handler = [controller, method]
         // in the handler set space for middleware by creating an array
@@ -230,9 +183,64 @@ class Router {
         $inst->$cb($request);
     }
 
-    public static function set_root($root) {
-        self::$root = $root;
+}
+
+
+// replace the untyped dynamic parts
+// with default string typed ones.
+function give_default_types_to_untyped($route) {
+
+    // default the missing datatypes to string
+    $name_only_pattern = '/\{(?<name_only>[a-zA-Z0-9]+)\}/';
+
+    // replace these names with default string types
+    preg_match_all($name_only_pattern, $route, $name_only);
+    foreach($name_only['name_only'] as $key => $value){
+        $route = preg_replace($name_only_pattern, "{" . $value . ":string}", $route, 1);
     }
+
+    return $route;
+}
+
+
+// grab all the dynamic part names and types
+// then insert type based regex and replace placeholders
+function replace_placeholders_with_regex($route) {
+
+    // grab the name:type groups using regex
+    $name_pattern = '/(?<=\{)(?<names>[a-zA-Z0-9]+)((?=:)|)/';
+    $type_pattern = '/(?<=:)(?<types>[a-zA-Z0-9]+)/';
+
+    preg_match_all($name_pattern, $route, $names_matches);
+    preg_match_all($type_pattern, $route, $types_matches);
+
+    $names = $names_matches['names'];
+    $types = $types_matches['types'];
+
+    foreach($names as $key=>$value) { 
+
+        // replace the placeholder with alphanumeric regex with name same
+        // as used in the route
+        if ($types[$key] == 'string'){
+            $target = '/\{[a-zA-Z0-9]+:[a-zA-Z0-9]+\}/';
+            $insert_pattern = "(?<$value>[a-zA-Z0-9]+)";
+        }
+        else if ($types[$key] == 'path') {
+            $target = '/\{[a-zA-Z0-9]+:[a-zA-Z0-9]+\}/';
+            $insert_pattern = "(?<$value>[a-zA-Z0-9/]+)";
+        }
+        else if ($types[$key] == 'int') {
+            $target = '/\{\w+:\w+\}/';
+            $insert_pattern = "(?<$value>\d+)";
+        }
+
+        $route = preg_replace($target, $insert_pattern, $route, 1);
+    }
+
+    // make route into a regex
+    $route = '/' . '^' . preg_replace('/\//', '\/', $route) . '$' . '/';
+
+    return $route;
 }
 
 ?>
