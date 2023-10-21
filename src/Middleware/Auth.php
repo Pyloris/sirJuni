@@ -15,9 +15,10 @@ class Auth {
     public static function login($data) {
         if (session_status() == PHP_SESSION_NONE)
             session_start();
-        $_SESSION['userid'] = $data['id'];
-        $_SESSION['username'] = $data['name'];
-        $_SESSION['user_email'] = $data['email'];
+        foreach($data as $key => $value) {
+            $_SESSION[$key] = $value;
+        } 
+        $_SESSION['auth'] = 'true';
         session_write_close();
     }
 
@@ -26,9 +27,10 @@ class Auth {
             if (session_status() == PHP_SESSION_NONE)
                 session_start();
             session_destroy();
-            unset($_SESSION['userid']);
-            unset($_SESSION['username']);
-            unset($_SESSION['user_email']);
+            foreach($_SESSION as $key => $value) {
+                unset($_SESSION[$key]);
+            }
+            unset($_SESSION['auth']);
             session_write_close();
         }
     }
@@ -36,7 +38,7 @@ class Auth {
     public static function check() {
         if (session_status() == PHP_SESSION_NONE)
             session_start();
-        return isset($_SESSION['userid']) ? TRUE : FALSE;
+        return isset($_SESSION['auth']) ? TRUE : FALSE;
     }
 
     public static function handle($request) {
