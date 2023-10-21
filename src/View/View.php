@@ -24,6 +24,11 @@ class VIEW {
             $context[$key] = self::$request->getRouteValue($key);
         }
 
+        // unpack get variables too
+        foreach(self::$request->queryKeys() as $key) {
+            $context[$key] = self::$request->queryData($key);
+        }
+
         // provides all the route variables and data passed
         // as variables.
         if ($context)
