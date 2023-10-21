@@ -137,9 +137,19 @@ class Router {
         // add route            // handler = [controller, method]
         // in the handler set space for middleware by creating an array
         $handler['middleware'] = [];
-        self::$routes[$route] = [
-            $method => $handler
-        ];
+
+        # make empty array for handlers
+        self::$routes[$route] = [];
+        # check if the $method is a list
+        # if true: add handler for each method
+        # else : just the default behaviour.
+        if (is_array($method)) {
+            foreach($method as $m) {
+                self::$routes[$route][$m] = $handler;
+            }
+        } else {
+            self::$routes[$route][$method] = $handler;
+        }
         
         // aslo save current route for use by middleware attachment
         self::$last_path_saved = [$route, $method];
@@ -153,8 +163,15 @@ class Router {
     public function middleware($middlewarefqcn) {
         
         if (self::$last_path_saved){
-            // add the middleware to the last added route;
-            self::$routes[self::$last_path_saved[0]][self::$last_path_saved[1]]['middleware'][] = $middlewarefqcn;
+            // if the $method in $last_path_saved is an array
+            if (is_array(self::$last_path_saved[1])) {
+                foreach(self::$last_path_saved[1] as $method) {
+                    self::$routes[self::$last_path_saved[0]][$method]['middleware'][] = $middlewarefqcn;
+                }
+            } else {
+                // add the middleware to the last added route;
+                self::$routes[self::$last_path_saved[0]][self::$last_path_saved[1]]['middleware'][] = $middlewarefqcn;
+            }
         }
         else {
             // render custom error page
