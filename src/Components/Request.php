@@ -60,6 +60,31 @@ class Request {
     public function sessionKeys() {
         return array_keys($_SESSION);
     }
+
+    public function fileName($key) {
+        return isset($_FILES[$key]["name"]) ? $_FILES[$key]["name"] : NULL;
+    }
+
+    public function File() {
+        return isset($_FILES[$this->fileName()]["tmp_name"]) ? $_FILES[$this->fileName()]["tmp_name"] : NULL;
+    }
+
+    public function saveFile($path) {
+        if (move_uploaded_file($_FILES[$this->fileName()]["tmp_name"], $path)) {
+            return TRUE;
+        }
+        else {
+            return FALSE;
+        }
+    }
+
+    public function fileMIME() {
+        return isset($_FILES[$this->fileName()]["type"]) ? $_FILES[$this->fileName()]["type"] : NULL;
+    }
+
+    public function fileSize() {
+        return isset($_FILES[$this->fileName()]["size"]) ? $_FILES[$this->fileName()]["size"] : NULL;
+    }
 }
 
 ?>

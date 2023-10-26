@@ -45,8 +45,10 @@ class Auth {
         if (!self::check()) {
             HelperFuncs::redirect(self::$url);
         }
-        // let the router handle the request
-        return TRUE;
+        else {
+            // let the router handle the request
+            return TRUE;
+        }
     }
 }
 
