@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . "../../vendor/autoload.php";
-
 namespace sirJuni\Framework\Components;
+
+require_once __DIR__ . "/../../vendor/autoload.php";
 
 use Razorpay\Api\Api;
 
@@ -10,7 +10,7 @@ class PaymentGateway {
     private $api_secret;
     private $api;
 
-    public function __construct($api_key, $api_secret, $success_handler = fn (resp) => header("location: success.php"), $failure_handler = fn (resp) => header("location: failure.php")) {
+    public function __construct($api_key, $api_secret) {
         $this->api_key = $api_key;
         $this->api_secret = $api_secret;
 
@@ -33,24 +33,25 @@ class PaymentGateway {
         }
     }
 
-    public function getIntegrationCode() {
+    public function getIntegrationCode($context) {
         // store all the code in HERE doc
+        extract($context);
         $code = <<<CODE
             <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
             <script>
             var options = {
-                "key": "<?= API_KEY; ?>", // Enter the Key ID generated from the Dashboard
-                "amount": "<?= $price; ?>", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "key": "$API_KEY",
+                "amount": "$price;",
                 "currency": "INR",
-                "name": "<?= COMPANY_NAME; ?>",
+                "name": "$COMPANY_NAME",
                 "description": "Test Transaction",
-                "image": "<?= COMPANY_LOGO_URL; ?>",
-                "order_id": "<?= $order_id; ?>", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-                "callback_url": "<?= $callback_url; ?>",
+                "image": "$COMPANY_LOGO_URL",
+                "order_id": "$order_id",
+                "callback_url": "$callback_url",
                 "prefill": {
-                    "name": "<?= $username; ?>,
-                    "email": "<?= $email; ?>",
-                    "contact": "<?= $phone; ?>"
+                    "name": "$username",
+                    "email": "$email",
+                    "contact": "$phone"
                 },
                 "notes": {
                     "address": "Razorpay Corporate Office"

@@ -87,7 +87,7 @@ class Request {
     }
 
     public function fileError() {
-        return isset($_FILES[$this->fileName()]["error"]) ? $_FILES[$this->fileName()]["error"] ? NULL;
+        return isset($_FILES[$this->fileName()]["error"]) ? $_FILES[$this->fileName()]["error"] : NULL;
     }
   
     public function allowedExtensions() {

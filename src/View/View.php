@@ -7,7 +7,10 @@ class VIEW {
     public static $request;
 
     public static function set_path($path) {
+        // trim \
         self::$path = rtrim($path, '\\');
+        // trim /
+        self::$path = rtrim($path, '/');
     }
 
     // set the request context from Application
