@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;500&display=swap" rel="stylesheet">
+
+
     <style>
         * {
     margin: 0;
     padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 200;
     }
 
     body {
@@ -26,12 +31,12 @@
 
         border-radius: 10%;
 
-        margin-bottom: 2rem;
+        margin-bottom:2rem;
     }
 
     h1 {
-        font-family:Verdana, Geneva, Tahoma, sans-serif;
-
+        font-weight: 500;
+        color: #008170;
         margin-bottom: 2rem;
     }
 
@@ -39,11 +44,13 @@
         color: red;
     }
 
-    h3 {
-        color: #6C9A8B;
+    p {
+        color: #1B9C85;
+        letter-spacing: .1rem;
+        font-weight: bolder;
     }
 
-    em {
+    strong {
         color: yellow;
     }
     </style>
@@ -61,6 +68,6 @@
 </svg>
 
     <h1>Not Found</h1> 
-    <h3>The requested path <em><strong>"<?= $path; ?>"</strong></em> was not found</h3>
+    <p>Oops! the elusive path <strong> "<?= $path; ?>"</strong> seems to be on vacation.</p>
 </body>
 </html>
