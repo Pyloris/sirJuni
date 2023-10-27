@@ -89,6 +89,21 @@ class Request {
     public function fileError() {
         return isset($_FILES[$this->fileName()]["error"]) ? $_FILES[$this->fileName()]["error"] : NULL;
     }
+  
+    public function allowedExtensions() {
+            $ext = $_FILES[$this->getExtension()];
+            $allowedTypes = ['jpg','jpeg','png','pdf'];
+            return in_array($ext, $allowedTypes);
+    }
+    
+    public function getExtension() {
+            return isset($_FILES[$this->fileName()])? strtolower(end(explode('.',$_FILES[$this->fileName()]))):NULL;
+    }
+
+    public function generateFileId() {
+            // this method generates a unique id/name for each file.
+            return substr($_FILES[$this->fileName],0,7).uniqid('',true).".".$_FILES[$this->getExtension()];
+    }
 }
 
 ?>
