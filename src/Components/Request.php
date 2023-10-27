@@ -86,10 +86,10 @@ class Request {
         return isset($_FILES[$this->fileName()]["size"]) ? $_FILES[$this->fileName()]["size"] : NULL;
     }
 
-    public function fileError(){
-            return isset($_FILES[$this->fileName()]['error']) ? $_FILES[$this->fileName()]['error']:NULL;
+    public function fileError() {
+        return isset($_FILES[$this->fileName()]["error"]) ? $_FILES[$this->fileName()]["error"] ? NULL;
     }
-
+  
     public function allowedExtensions() {
             $ext = $_FILES[$this->getExtension()];
             $allowedTypes = ['jpg','jpeg','png','pdf'];
