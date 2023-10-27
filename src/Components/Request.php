@@ -85,6 +85,10 @@ class Request {
     public function fileSize() {
         return isset($_FILES[$this->fileName()]["size"]) ? $_FILES[$this->fileName()]["size"] : NULL;
     }
+
+    public function fileError(){
+            return isset($_FILES[$this->fileName()]['error']) ? $_FILES[$this->fileName()]['error']:NULL;
+    }
 }
 
 ?>
