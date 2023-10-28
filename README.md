@@ -8,7 +8,13 @@
 #### A Simple Mini-Framework for PHP Backend Development
 
 ## Quick Install
-To install this framework, add a composer.json to your projects root directory.
+Just execute
+```
+composer require shoaib/sir-juni
+```
+OR
+
+add a composer.json to your projects root directory.
 copy and paste the below contents in the file
 ```json
 {
