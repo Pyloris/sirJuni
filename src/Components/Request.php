@@ -98,28 +98,28 @@ class Request {
 
 
     // get the path to the tmp file where the uploaded file is saved
-    public function File() {
-        return isset($_FILES[$this->fileName()]["tmp_name"]) ? $_FILES[$this->fileName()]["tmp_name"] : NULL;
+    public function File($key) {
+        return isset($_FILES[$key]["tmp_name"]) ? $_FILES[$key]["tmp_name"] : NULL;
     }
 
     // get the MIME type of file
-    public function fileMIME() {
-        return isset($_FILES[$this->fileName()]["type"]) ? $_FILES[$this->fileName()]["type"] : NULL;
+    public function fileMIME($key) {
+        return isset($_FILES[$key]["type"]) ? $_FILES[$key]["type"] : NULL;
     }
 
     // get the size of the uploaded file
-    public function fileSize() {
-        return isset($_FILES[$this->fileName()]["size"]) ? $_FILES[$this->fileName()]["size"] : NULL;
+    public function fileSize($key) {
+        return isset($_FILES[$key]["size"]) ? $_FILES[$key]["size"] : NULL;
     }
 
     // get the error code corresponding to file upload
-    public function fileError() {
-        return isset($_FILES[$this->fileName()]["error"]) ? $_FILES[$this->fileName()]["error"] : NULL;
+    public function fileError($key) {
+        return isset($_FILES[$key]["error"]) ? $_FILES[$key]["error"] : NULL;
     }
     
     // get the extension of the file if it has any: otherwise return NULL
-    public function getExtension() {
-            return $this->fileName() ? strtolower(end(explode('.',$this->fileName()))) : NULL;
+    public function getExtension($key) {
+            return $this->fileName($key) ? strtolower(end(explode('.',$this->fileName($key)))) : NULL;
     }
 }
 
