@@ -108,9 +108,13 @@ class Router {
         foreach($middleware as $mdw) {
             // becomes false even if 1 middleware fails
             $SUCCESS = $mdw::handle($request);
-            
-            if (!$SUCCESS)
-                break;
+           
+            // if middleware fails
+            // send user to fallback url
+            if (!$SUCCESS) {
+                $mdw::fallback();
+                exit();
+            }
         }
 
         // if all middlewares pass the route the request to the controller

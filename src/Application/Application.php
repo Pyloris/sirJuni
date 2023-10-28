@@ -5,7 +5,9 @@ use sirJuni\Framework\Handler\Router;
 use sirJuni\Framework\Components\Request;
 use sirJuni\Framework\View\VIEW;
 
-// APPLICATION MATCHES MATCHES ROUTES TO PROPER HANDLERS
+// THIS CLASS CREATES A REQUEST INSTANCE
+// GIVES VIEW ACCESS TO REQUEST
+// AND HAS A METHOD TO FORWARD REQUEST TO Router.
 class Application {
     public $request;
 

@@ -116,7 +116,6 @@ class Request {
     public function fileError() {
         return isset($_FILES[$this->fileName()]["error"]) ? $_FILES[$this->fileName()]["error"] : NULL;
     }
-   
     
     // get the extension of the file if it has any: otherwise return NULL
     public function getExtension() {
