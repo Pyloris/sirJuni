@@ -82,7 +82,7 @@ class Request {
     }
     
     public function getExtension() {
-            return isset($_FILES[$this->fileName()])? strtolower(end(explode('.',$this->fileName()))) : NULL;
+            return $this->fileName() ? strtolower(end(explode('.',$this->fileName()))) : NULL;
     }
 }
 
