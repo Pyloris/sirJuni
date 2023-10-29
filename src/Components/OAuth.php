@@ -5,6 +5,7 @@ require_once __DIR__ . "/../../vendor/autoload.php";
 
 use sirJuni\Framework\Components\Request;
 use Google\Client;
+use Google\Service\Oauth2;
 
 class OAuth2 {
     public function __construct($secret_json, $redirect_uri, $scopes) {
@@ -38,10 +39,8 @@ class OAuth2 {
             $client->authenticate($request->queryData('code'));
             $access_token =$client->getAccessToken();
             $client->setAccessToken($access_token);
-
-            // $client->fetchAccessTokenWithAuthCode($request->queryData('code'));
         
-            $oauth2 = new Google_Service_Oauth2($client);
+            $oauth2 = new Oauth2($client);
             $$this->userInfo = $oauth2->userinfo->get();
 
         }
