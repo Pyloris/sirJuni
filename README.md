@@ -6,7 +6,7 @@
 ![logo](./__dont_touch/logo.png)
 
 #### A Simple Mini-Framework for PHP Backend Development
-
+[![Stargazers repo roster for @Pyloris/sirJuni](https://reporoster.com/stars/Pyloris/sirJuni)](https://github.com/Pyloris/sirJuni/stargazers)
 ## Quick Install
 Just execute
 ```
