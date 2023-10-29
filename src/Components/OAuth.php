@@ -7,7 +7,7 @@ use sirJuni\Framework\Components\Request;
 use Google\Client;
 use Google\Service\Oauth2;
 
-class OAuth2 {
+class OAuth {
     public function __construct($secret_json, $redirect_uri, $scopes) {
         $request = new Request();
 
@@ -41,7 +41,7 @@ class OAuth2 {
             $client->setAccessToken($access_token);
         
             $oauth2 = new Oauth2($client);
-            $$this->userInfo = $oauth2->userinfo->get();
+            $this->userInfo = $oauth2->userinfo->get();
 
         }
 
