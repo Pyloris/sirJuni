@@ -19,7 +19,8 @@
     "require": {
         "php": ">=7.4",
         "razorpay/razorpay" : "2.*",
-        "google/apiclient" : "^2.15.0"
+        "google/apiclient" : "^2.15.0",
+        "shoaib/sir-juni": "^1.0"
     },
 
     "minimum-stability": "stable",
