@@ -7,36 +7,11 @@
 
 #### A Simple Mini-Framework for PHP Backend Development
 
-## Quick Install
+## Quick Install with Composer
 Just execute
 ```
 composer require shoaib/sir-juni
 ```
-OR
-
-add a composer.json to your projects root directory.
-copy and paste the below contents in the file
-```json
-{
-    "autoload": {
-        "psr-4": {
-            "sirJuni\\Framework\\" : "vendor/shoaib/sir-juni/src/"
-        }
-    },
-
-    "require": {
-        "shoaib/sir-juni" : "dev-master"
-    }
-
-}
-
-```
-
-After adding these contents to this file, run the following command
-```shell
-$ composer install
-```
-It should install the Framework in your root directory.
 
 # How to use
 If you want to use Components from the Framework, make sure you include the `autoload.php` file from the `vendor/` directory that gets created after running the above command.
