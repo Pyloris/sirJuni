@@ -37,7 +37,7 @@ class PaymentGateway {
         // store all the code in HERE doc
         extract($context);
         $code = <<<CODE
-            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+           <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
             <script>
             var options = {
                 "key": "$API_KEY",
@@ -47,7 +47,7 @@ class PaymentGateway {
                 "description": "Test Transaction",
                 "image": "$COMPANY_LOGO_URL",
                 "order_id": "$order_id",
-                "callback_url": "$callback_url",
+                "callback_url": "$success_callback_url",
                 "prefill": {
                     "name": "$username",
                     "email": "$email",
@@ -62,16 +62,7 @@ class PaymentGateway {
             };
             var rzp1 = new Razorpay(options);
             rzp1.on('payment.failed', function (response){
-                alert(response.error.code);
-                    alert(response.error.description);
-                    alert(response.error.source);
-                    alert(response.error.step);
-                    alert(response.error.reason);
-                    alert(response.error.metadata.order_id);
-                    alert(response.error.metadata.payment_id);(response.error.step);
-                    alert(response.error.reason);
-                    alert(response.error.metadata.order_id);
-                    alert(response.error.metadata.payment_id);
+                document.location.href = "$failure_callback_url" + "?code=" + response.error.code + "&reason=" + response.error.reason + "&step=" + response.error.step + "&source=" + response.error.source + "&order_id=" + response.error.metadata.order_id + "&payment_id=" + response.error.metadata.payment_id;
             });
             document.getElementById('rzp-button1').onclick = function(e){
                 rzp1.open();
