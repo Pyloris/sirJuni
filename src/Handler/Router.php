@@ -84,7 +84,7 @@ class Router {
         // this part of code deals with extracting any placeholder values
         // It is executed if there are {xxx} placeholders placed while defining URL
         // using add_route static method of this class.
-        foreach($matches as $name=>$value){
+        foreach($matches as $name=>$value) {
             $request->addRouteHolder($name, $value);
         }
 
