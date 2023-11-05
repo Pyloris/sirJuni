@@ -22,4 +22,4 @@ jobs:
 
             - name: Running all the tests in tests/ folder
               run: |
-                ./vendor/bin/phpunit --verbose tests
+                vendor/bin/phpunit tests
