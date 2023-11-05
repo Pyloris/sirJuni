@@ -11,7 +11,7 @@ on:
 
 jobs:
 
-    TestCode:
+    Run-Tests:
 
         runs-on: ubuntu-latest
 
