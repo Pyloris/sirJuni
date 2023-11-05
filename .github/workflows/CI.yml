@@ -20,6 +20,8 @@ jobs:
             - uses: php-actions/composer@v6
             - name: Install all dependencies
               run: composer install
+            - name: set permission for phpunit
+              run: chmod u+x vendor/bin/phpunit
             - name: Running all the tests in tests/ folder
               run: |
                 vendor/bin/phpunit tests
