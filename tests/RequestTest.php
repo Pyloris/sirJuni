@@ -28,11 +28,11 @@ final class RequestTest extends TestCase
     public function testFileMethods() {
         $request = new Request();
 
-        assertSame('filename.ext', $request->fileName('input_file'));
-        assertSame('image/jpg', $request->fileMIME('input_file'));
-        assertSame('wwzz.tmp', $request->File('input_file'));
-        assertSame(4040, $request->fileError('input_file'));
-        assertSame('ext', $request->fileExtension('input_file'));
+        $this->assertSame('filename.ext', $request->fileName('input_file'));
+        $this->assertSame('image/jpg', $request->fileMIME('input_file'));
+        $this->assertSame('wwzz.tmp', $request->File('input_file'));
+        $this->assertSame(4040, $request->fileError('input_file'));
+        $this->assertSame('ext', $request->fileExtension('input_file'));
     } 
 }
 ?>
