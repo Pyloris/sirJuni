@@ -119,7 +119,22 @@ class Request {
     
     // get the extension of the file if it has any: otherwise return NULL
     public function getExtension($key) {
-            return $this->fileName($key) ? strtolower(end(explode('.',$this->fileName($key)))) : NULL;
+        // get the file name
+        $name = $this->fileName($key);
+
+        if ($name) {
+            $split_name = explode('.', $name);
+
+            if (count($split_name) > 1) {
+                return strtolower(end($split_name));
+            }
+            else {
+                return NULL;
+            }
+        }
+        else {
+            return NULL;
+        }
     }
 }
 

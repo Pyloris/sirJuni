@@ -16,6 +16,11 @@
             "email": "wanishoaib@protonmail.com"
         }
     ],
+
+    "require-dev" : {
+        "phpunit/phpunit" : "^9.5"
+    },
+
     "require": {
         "php": ">=7.4",
         "razorpay/razorpay" : "2.*",

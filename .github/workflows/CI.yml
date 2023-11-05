@@ -1,0 +1,25 @@
+name: sirJuni CI
+
+on:
+    push:
+        branches: ['master']
+    pull_request:
+        branches: ['master']
+    
+    workflow_dispatch:
+
+
+jobs:
+
+    TestCode:
+
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+            - uses: php-actions/composer@v6
+            - uses: php-actions/phpunit@v3
+
+            - name: Running all the tests in tests/ folder
+              run: |
+                ./vendor/bin/phpunit --verbose tests
