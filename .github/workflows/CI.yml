@@ -20,6 +20,7 @@ jobs:
             - uses: php-actions/composer@v6
             - name: Install all dependencies
               run: composer install
+            - run: chmod -R 777 /home/runner/work/sirJuni/sirJuni/vendor
             - name: Running all the tests in tests/ folder
               run: |
                 vendor/bin/phpunit tests
