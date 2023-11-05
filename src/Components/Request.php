@@ -118,7 +118,7 @@ class Request {
     }
     
     // get the extension of the file if it has any: otherwise return NULL
-    public function getExtension($key) {
+    public function fileExtension($key) {
         // get the file name
         $name = $this->fileName($key);
 

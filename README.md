@@ -3,7 +3,7 @@
 ![badge2](https://img.shields.io/static/v1?label=easy&message=install&color=green)
 ![badge1](https://img.shields.io/static/v1?label=PHP%20>%208.2&message=Framework&color=blue)
 # SirJuni
-![logo](./__dont_touch/logo.png)
+![logo](./hero/logo.png)
 
 #### A Simple Mini-Framework for PHP Backend Development
 

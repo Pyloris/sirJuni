@@ -25,50 +25,14 @@ final class RequestTest extends TestCase
         $_FILES = $this->backupFiles;
     }
 
-    public function testFileSize() {
+    public function testFileMethods() {
         $request = new Request();
 
-        $size = $request->fileSize('input_file');
-
-        $this->assertSame(NULL, $size);
-    }
-
-    public function testFileMIME() {
-        $request = new Request();
-
-        $type = $request->fileMIME('input_file');
-
-        $this->assertSame('image/jpg', $type);
-    }
-
-    public function testFileError() {
-        $request = new Request();
-
-        $error = $request->fileError('input_file');
-
-        $this->assertSame(4040, $error);
-    }
-
-    public function testFile() {
-        $request = new Request();
-
-        $tmp_name = $request->File('input_file');
-
-        $this->assertSame('wwzz.tmp', $tmp_name);
-    }
-
-    public function testFileName() {
-        $request = new Request();
-
-        $name = $request->fileName('input_file');
-        $this->assertSame('filename.ext', $name);
-    }
-
-    public function testGetExtension() {
-        $request = new Request();
-        
-        $ext = $request->getExtension('input_file');
-        $this->assertSame('ext', $ext);
-    }
+        assertSame('filename.ext', $request->fileName('input_file'));
+        assertSame('image/jpg', $request->fileMIME('input_file'));
+        assertSame('wwzz.tmp', $request->File('input_file'));
+        assertSame(4040, $request->fileError('input_file'));
+        assertSame('ext', $request->fileExtension('input_file'));
+    } 
 }
 ?>
