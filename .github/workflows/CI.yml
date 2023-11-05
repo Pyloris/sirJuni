@@ -18,7 +18,10 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - uses: php-actions/composer@v6
-            - uses: php-actions/phpunit@v3
+            - uses: php-actions/phpunit@master
+              with:
+                version: 9.6
+                bootstrap: vendor/autoload.php
             - name: Installing dependencies
               run : |
                 composer install
