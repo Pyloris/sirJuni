@@ -3,7 +3,7 @@
     "description": "A simple mini-php framework to build backends.",
     "type": "project",
     "license": "MIT",
-    "version": "1.0",
+    "version": "2.0",
     "autoload": {
         "psr-4": {
             "sirJuni\\Framework\\": "src/"
