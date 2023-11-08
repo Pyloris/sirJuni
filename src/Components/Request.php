@@ -83,7 +83,7 @@ class Request {
     // get data in $_SESSION : make sure session is started before calling this.
     public function sessionData($key) {
         // make sure session is running
-        if (session_status == PHP_SESSION_NONE)
+        if (session_status() == PHP_SESSION_NONE)
             session_start();
         return isset($_SESSION[$key]) ? $_SESSION[$key] : NULL;
     }
@@ -91,7 +91,7 @@ class Request {
 
     // get all the session keys
     public function sessionKeys() {
-        if (session_status == PHP_SESSION_NONE)
+        if (session_status() == PHP_SESSION_NONE)
             session_start();
         return array_keys($_SESSION);
     }
