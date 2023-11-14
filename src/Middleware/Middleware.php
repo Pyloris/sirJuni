@@ -11,7 +11,7 @@ class Middleware {
         self::$url = $route;
     }
 
-    abstract public static function fallback() {
+    public static function fallback() {
         HelperFuncs::redirect(self::$url);
     }
 }
