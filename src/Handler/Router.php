@@ -17,7 +17,7 @@ class Router {
 
     // storing the path to _templates folder
     // which contains all the necessary html
-    private static $path = __DIR__ . "\\..\\_templates\\";
+    private static $path = __DIR__ . "/../_templates/";
 
     static public function handle($request) {
 

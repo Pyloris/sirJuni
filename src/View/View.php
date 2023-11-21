@@ -37,7 +37,7 @@ class VIEW {
         if ($context)
             extract($context);
 
-        include self::$path . "\\$page";
+        include self::$path . "/$page";
     }
 }
 
